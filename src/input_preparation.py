@@ -13,8 +13,10 @@ from tqdm import tqdm
 # blast中，获得对应位置特异得分矩阵（PSSM）。最终把整理好的
 # 数据存入.json文件中，以便以后使用。
 
+
 def time_print(str):
     print(time.strftime('%Y-%m-%d %X', time.localtime())+' '+str)
+
 
 class Protein:
     def __init__(self, name="<unknown name>",
