@@ -101,7 +101,10 @@ def seq_to_pssm(name, seq):
               '-num_iterations 3'
               .format(seq_fp_tmp, pssm_fp_tmp, out_fp_tmp))
 
-    pssm = read_pssm(pssm_fp_tmp)
+    if os.path.exists(pssm_fp_tmp):
+        pssm = read_pssm(pssm_fp_tmp)
+    else:
+        return None
 
     if os.path.exists(seq_fp_tmp):
         os.remove(seq_fp_tmp)
@@ -119,6 +122,8 @@ def raw_data_to_json(filepath, jsonpath):
     p_json = []
     for p in tqdm(protein, desc="Calculate PSSM"):
         p.pssm = seq_to_pssm(name=p.name, seq=p.sequence)
+        if p.pssm is None:
+            continue
         # 由于设计疏漏，最后一个蛋白质二级结构少一个字符
         # 为了避免此问题，将缺失数据（1条）直接舍去
         assert len(p.pssm) == len(p.sequence)
@@ -158,4 +163,4 @@ def raw_data_to_json(filepath, jsonpath):
 # seq_to_pssm(name, seq)
 
 
-raw_data_to_json('ss1.txt.gz', 'ss.json')
+raw_data_to_json('ss.txt.gz', 'ss.json')
