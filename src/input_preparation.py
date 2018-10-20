@@ -117,7 +117,7 @@ def raw_data_to_json(filepath, jsonpath):
     protein = import_raw_data(filepath)
     time_print('Calculate the PSSM of each protein, total '+protein.__len__().__str__())
     p_json = []
-    for p in tqdm(protein, desc="计算PSSM"):
+    for p in tqdm(protein, desc="Calculate PSSM"):
         p.pssm = seq_to_pssm(name=p.name, seq=p.sequence)
         # 由于设计疏漏，最后一个蛋白质二级结构少一个字符
         # 为了避免此问题，将缺失数据（1条）直接舍去
