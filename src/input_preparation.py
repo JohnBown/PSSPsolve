@@ -8,6 +8,7 @@ from Bio.Alphabet import generic_protein
 from Bio import SeqIO
 from tqdm import tqdm
 
+
 # 此模块主要为输入数据准备工作。针对训练文档'ss.txt'的输入，
 # 将相关信息存入Protein类的数组并依次把seq_str应用到psi-
 # blast中，获得对应位置特异得分矩阵（PSSM）。最终把整理好的
@@ -15,7 +16,7 @@ from tqdm import tqdm
 
 
 def time_print(str):
-    print(time.strftime('%Y-%m-%d %X', time.localtime())+' '+str)
+    print(time.strftime('%Y-%m-%d %X', time.localtime()) + ' ' + str)
 
 
 class Protein:
@@ -44,7 +45,7 @@ def import_raw_data(filepath):
     # 导入包括蛋白质二级结构的原始数据压缩文件
     # 返回：蛋白质实例的列表
 
-    time_print('Import raw data file:"'+filepath+'"')
+    time_print('Import raw data file:"' + filepath + '"')
     with gzip.open(filepath, 'rt') as f:
         seq = ""
         p = None
@@ -92,13 +93,18 @@ def seq_to_pssm(name, seq):
     # psi-blast搜索生成pssm的文件
     # TODO：需要根据本机配置情况进行修改
     os.system('psiblast '
-              '-comp_based_stats 1 '  # 不添加这条会产生警告
               '-db ~/Database/pdbaa '
               '-query {0} '
               '-out_ascii_pssm {1} '
               '-out {2} '
-              '-evalue 0.01 '
-              '-num_iterations 3'
+              # '-evalue 10 '   # 阈值
+              # '-word_size 3 '
+              # '-gapopen <int> '
+              # '-gapextend <int> '
+              # '-matrix BLOSUM62'
+              # '-threshold 0.001 '
+              '-num_iterations 3 '
+              '-comp_based_stats 1 '  # 不添加这条会产生警告
               .format(seq_fp_tmp, pssm_fp_tmp, out_fp_tmp))
 
     if os.path.exists(pssm_fp_tmp):
@@ -116,11 +122,13 @@ def seq_to_pssm(name, seq):
     return pssm
 
 
-def raw_data_to_json(filepath, jsonpath):
+def raw_data_to_json(filepath):
     protein = import_raw_data(filepath)
-    time_print('Calculate the PSSM of each protein, total '+protein.__len__().__str__())
+    time_print('Calculate the PSSM of each protein, total ' + protein.__len__().__str__())
     p_json = []
-    for p in tqdm(protein, desc="Calculate PSSM"):
+    count = 5000
+
+    for i, p in enumerate(tqdm(protein, desc="Calculate PSSM")):
         p.pssm = seq_to_pssm(name=p.name, seq=p.sequence)
         if p.pssm is None:
             continue
@@ -129,38 +137,15 @@ def raw_data_to_json(filepath, jsonpath):
         assert len(p.pssm) == len(p.sequence)
         p_json.append(p.__dict__)
 
-    # Writing JSON data
-    with open(jsonpath, 'w') as f:
-        json.dump(p_json, f)
+        if ((i+1) % count) == 0:
+            # Writing JSON data
+            with open('json/ss' + str(i // count) + '.json', 'w') as f:
+                json.dump(p_json, f)
+                p_json = []
+
     time_print('Import completed')
-    # Reading data back
-    # with open('data.json', 'r') as f:
-    #     data = json.load(f)
 
 
-# 测试：Protein
-# p = Protein(name="AOISJ")
-# p.sequence = "ASJIDJAOSIJIOAJS"
-# p.secstr = "AJSOI ASJ   a"
-# print(p.__dict__)
-#
-# 测试：import_raw_data()
-# protein = import_raw_data('ss1.txt.gz')
-# for pro in protein:
-#     print(pro.name)
-#     print(pro.sequence)
-#     print(pro.secstr)
-#
-# 测试：read_pssm(filepath)
-# print(read_pssm('_pssm_temp.txt'))
-#
-# 测试：seq_to_pssm(name, seq)
-# name = '101M'
-# seq = 'MVLSEGEWQLVLHVWAKVEADVAGHGQDILIRLFKSHPETLEKFDRVKHL' \
-#       'KTEAEMKASEDLKKHGVTVLTALGAILKKKGHHEAELKPLAQSHATKHKI' \
-#       'PIKYLEFISEAIIHVLHSRHPGNFGADAQGAMNKALELFRKDIAAKYKEL' \
-#       'GYQG'
-# seq_to_pssm(name, seq)
-
-
-raw_data_to_json('ss.txt.gz', 'ss.json')
+os.system('rm -rf json/\n'
+          'mkdir json/\n')
+raw_data_to_json('ss.txt.gz')
