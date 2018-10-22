@@ -146,6 +146,6 @@ def raw_data_to_json(filepath):
     time_print('Import completed')
 
 
-os.system('rm -rf json/\n'
-          'mkdir json/\n')
-raw_data_to_json('ss.txt.gz')
+# os.system('rm -rf json/\n'
+#           'mkdir json/\n')
+# raw_data_to_json('ss.txt.gz')
