@@ -40,5 +40,5 @@ def slide_raw_data(filepath=None, w_len=25):
     return sliding_data
 
 
-sliding_data = slide_raw_data(filepath='json/ss3.json', w_len=25)
-print(sliding_data.__len__())
+# sliding_data = slide_raw_data(filepath='json/ss3.json', w_len=25)
+# print(sliding_data.__len__())
