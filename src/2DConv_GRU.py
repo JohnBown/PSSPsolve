@@ -70,7 +70,6 @@ def conv_gru_model():
 
     return model
 
-
-model = conv_gru_model()
-
-print(model.get_layer(name='main_input'))
+# model = conv_gru_model()
+#
+# print(model.get_layer(name='main_input'))
