@@ -1,9 +1,68 @@
+import numpy as np
 from keras.layers.embeddings import Embedding
 from keras.layers import Input, Dense, concatenate, Reshape, Conv2D, Bidirectional, GRU
 from keras.regularizers import l2
 from keras.models import Model
 from keras.optimizers import Adam
 from keras.layers.wrappers import TimeDistributed
+from keras.callbacks import EarlyStopping, ModelCheckpoint
+
+
+def load_cul6133():
+    '''
+    TRAIN data Cullpdb+profile_6133_filtered
+    Test data  CB513\CASP10\CASP11
+    '''
+    print("Loading train data (Cullpdb_filted)...")
+    # data = np.load(gzip.open('../cullpdb_5926_data/cullpdb+profile_5926.npy.gz', 'rb'))
+    data = np.load(open('cullpdb+profile_6133.npy', 'rb'))
+    data = np.reshape(data, (-1, 700, 57))
+
+    datahot = data[:, :, 0:21]  # sequence feature
+    # print 'sequence feature',dataonehot[1,:3,:]
+    datapssm = data[:, :, 35:56]  # profile feature
+    # print 'profile feature',datapssm[1,:3,:]
+    labels = data[:, :, 22:30]  # secondary struture label , 8-d
+    # shuffle data
+    num_seqs, seqlen, feature_dim = np.shape(data)
+    num_classes = labels.shape[2]
+    seq_index = np.arange(0, num_seqs)  #
+    np.random.shuffle(seq_index)
+
+    # train data
+    trainhot = datahot[seq_index[:5600]]  # 21
+    trainlabel = labels[seq_index[:5600]]  # 8
+    trainpssm = datapssm[seq_index[:5600]]  # 21
+
+    # val data
+    vallabel = labels[seq_index[5605:5877]]  # 8
+    valpssm = datapssm[seq_index[5605:5877]]  # 21
+    valhot = datahot[seq_index[5605:5877]]  # 21
+
+    # test data
+    testhot = datahot[seq_index[5877:]]  # 21
+    testlabel = labels[seq_index[5877:]]  # 8
+    testpssm = datapssm[seq_index[5877:]]  # 21
+
+    train_hot = np.ones((trainhot.shape[0], trainhot.shape[1]))
+    for i in range(trainhot.shape[0]):
+        for j in range(trainhot.shape[1]):
+            if np.sum(trainhot[i, j, :]) != 0:
+                train_hot[i, j] = np.argmax(trainhot[i, j, :])
+
+    val_hot = np.ones((valhot.shape[0], valhot.shape[1]))
+    for i in range(valhot.shape[0]):
+        for j in range(valhot.shape[1]):
+            if np.sum(valhot[i, j, :]) != 0:
+                val_hot[i, j] = np.argmax(valhot[i, j, :])
+
+    test_hot = np.ones((testhot.shape[0], testhot.shape[1]))
+    for i in range(testhot.shape[0]):
+        for j in range(testhot.shape[1]):
+            if np.sum(testhot[i, j, :]) != 0:
+                val_hot[i, j] = np.argmax(testhot[i, j, :])
+
+    return train_hot, trainpssm, trainlabel, val_hot, valpssm, vallabel, test_hot, testlabel, testpssm
 
 
 def conv_gru_model():
@@ -12,7 +71,7 @@ def conv_gru_model():
     # (?, 700, 21)
     x = Embedding(output_dim=21, input_dim=21, input_length=700)(main_input)
     # (?, 700, 21)
-    auxiliary_input = Input(shape=(700, 21), name='axu_input')
+    auxiliary_input = Input(shape=(700, 21), name='aux_input')
     # (?, 700, 42)
     input_feature = concatenate([x, auxiliary_input], axis=-1)
 
@@ -53,11 +112,18 @@ def conv_gru_model():
 
     # (?, 700, 300)
     # Params:fc_1 = (592 + 1) * 300
-    fc_1 = TimeDistributed(Dense(300, activation='relu', kernel_regularizer=l2(0.001)))(rnn_output)
-    fc_2 = TimeDistributed(Dense(300, activation='relu', kernel_regularizer=l2(0.001)))(fc_1)
+    fc_1 = TimeDistributed(
+        Dense(300, activation='relu', kernel_regularizer=l2(0.001)),
+    )(rnn_output)
+    fc_2 = TimeDistributed(
+        Dense(300, activation='relu', kernel_regularizer=l2(0.001)),
+    )(fc_1)
 
     # (?, 700, 8)
-    main_output = TimeDistributed(Dense(8, activation='softmax', name='main_output'))(fc_2)
+    main_output = TimeDistributed(
+        Dense(8, activation='softmax'),
+        name='main_output'
+    )(fc_2)
 
     model = Model(inputs=[main_input, auxiliary_input], outputs=[main_output])
     adam = Adam(lr=0.003)
@@ -70,6 +136,32 @@ def conv_gru_model():
 
     return model
 
-# model = conv_gru_model()
-#
-# print(model.get_layer(name='main_input'))
+
+trainhot, trainpssm, trainlabel, valhot, valpssm, vallabel, testhot, testlabel, testpssm = load_cul6133()
+
+print(trainhot.shape)
+print(trainpssm.shape)
+print(trainlabel.shape)
+print(valhot.shape)
+print(valpssm.shape)
+print(vallabel.shape)
+print(testhot.shape)
+print(testlabel.shape)
+print(testpssm.shape)
+
+conv_gru_model = conv_gru_model()
+
+earlyStopping = EarlyStopping(monitor='val_weighted_accuracy', patience=5, verbose=1, mode='auto')
+load_file = '(3-7-11)64conv2d-(3)200bi_gru-(2)300fc-adam003.h5'
+checkpointer = ModelCheckpoint(filepath=load_file, verbose=1, save_best_only=True)
+
+history = conv_gru_model.fit({'main_input': trainhot, 'aux_input': trainpssm},
+                             {'main_output': trainlabel},
+                             validation_data=({'main_input': valhot, 'aux_input': valpssm}, {'main_output': vallabel}),
+                             epochs=200,
+                             batch_size=64,
+                             callbacks=[checkpointer, earlyStopping],
+                             verbose=2,
+                             shuffle=True)
+
+# model.load_weights(load_file)
