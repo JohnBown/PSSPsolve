@@ -55,7 +55,7 @@ def slide_raw_data(filepath=None, w_len=25):
                     'output': data['secstr'][i]
                 })
 
-        return sliding_data
+    return sliding_data
 
 
 # sliding_datas = slide_raw_data(filepath='json/ss3.json',

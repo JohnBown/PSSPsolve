@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{蛋白质预测}{3}{0}{1}
+\beamer@sectionintoc {2}{预备知识}{5}{0}{2}
+\beamer@sectionintoc {3}{深度模型架构}{14}{0}{3}
+\beamer@sectionintoc {4}{实验和总结}{19}{0}{4}

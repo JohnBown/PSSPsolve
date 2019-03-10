@@ -6,6 +6,7 @@ from keras.models import Model
 from keras.optimizers import Adam
 from keras.layers.wrappers import TimeDistributed
 from keras.callbacks import EarlyStopping, ModelCheckpoint
+from keras import metrics
 
 
 def load_cul6133():
@@ -151,8 +152,8 @@ print(testpssm.shape)
 
 conv_gru_model = conv_gru_model()
 
-earlyStopping = EarlyStopping(monitor='val_weighted_accuracy', patience=5, verbose=1, mode='auto')
-load_file = '(3-7-11)64conv2d-(3)200bi_gru-(2)300fc-adam003.h5'
+# earlyStopping = EarlyStopping(monitor='val_weighted_accuracy', patience=5, verbose=1, mode='auto')
+load_file = 'a3-7-11_64conv2d-3_200bi_gru-2_300fc-adam003.h5'
 checkpointer = ModelCheckpoint(filepath=load_file, verbose=1, save_best_only=True)
 
 history = conv_gru_model.fit({'main_input': trainhot, 'aux_input': trainpssm},
@@ -160,8 +161,10 @@ history = conv_gru_model.fit({'main_input': trainhot, 'aux_input': trainpssm},
                              validation_data=({'main_input': valhot, 'aux_input': valpssm}, {'main_output': vallabel}),
                              epochs=200,
                              batch_size=64,
-                             callbacks=[checkpointer, earlyStopping],
+                             # callbacks=[checkpointer, earlyStopping],
+                             callbacks=[checkpointer],
                              verbose=2,
-                             shuffle=True)
+                             shuffle=True,
+                             )
 
 # model.load_weights(load_file)

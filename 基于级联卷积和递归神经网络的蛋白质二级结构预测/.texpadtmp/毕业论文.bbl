@@ -1,0 +1,201 @@
+\begin{thebibliography}{10}
+
+\bibitem{asai1993prediction}
+K.~Asai, S.~Hayamizu, and K.~Handa.
+\newblock Prediction of protein secondary structure by the hidden markov model.
+\newblock {\em Bioinformatics}, 9(2):141--146, 1993.
+
+\bibitem{bidargaddi2009combining}
+N.~P. Bidargaddi, M.~Chetty, and J.~Kamruzzaman.
+\newblock Combining segmental semi-markov models with neural networks for
+  protein secondary structure prediction.
+\newblock {\em Neurocomputing}, 72(16-18):3943--3950, 2009.
+
+\bibitem{bulut2007dssp}
+E.~Bulut and I.~Korpeoglu.
+\newblock Dssp: a dynamic sleep scheduling protocol for prolonging the lifetime
+  of wireless sensor networks.
+\newblock In {\em Advanced Information Networking and Applications Workshops,
+  2007, AINAW'07. 21st International Conference on}, volume~2, pages 725--730.
+  IEEE, 2007.
+
+\bibitem{chung2014empirical}
+J.~Chung, C.~Gulcehre, K.~Cho, and Y.~Bengio.
+\newblock Empirical evaluation of gated recurrent neural networks on sequence
+  modeling.
+\newblock {\em arXiv preprint arXiv:1412.3555}, 2014.
+
+\bibitem{gers1999learning}
+F.~A. Gers, J.~Schmidhuber, and F.~Cummins.
+\newblock Learning to forget: Continual prediction with lstm.
+\newblock 1999.
+
+\bibitem{gewehr2005ssep}
+J.~E. Gewehr and R.~Zimmer.
+\newblock Ssep-domain: protein domain prediction by alignment of secondary
+  structure elements and profiles.
+\newblock {\em bioinformatics}, 22(2):181--187, 2005.
+
+\bibitem{glorot2010understanding}
+X.~Glorot and Y.~Bengio.
+\newblock Understanding the difficulty of training deep feedforward neural
+  networks.
+\newblock In {\em Proceedings of the thirteenth international conference on
+  artificial intelligence and statistics}, pages 249--256, 2010.
+
+\bibitem{goldberg2014word2vec}
+Y.~Goldberg and O.~Levy.
+\newblock word2vec explained: deriving mikolov et al.'s negative-sampling
+  word-embedding method.
+\newblock {\em arXiv preprint arXiv:1402.3722}, 2014.
+
+\bibitem{goodfellow2016deep}
+I.~Goodfellow, Y.~Bengio, A.~Courville, and Y.~Bengio.
+\newblock {\em Deep learning}, volume~1.
+\newblock MIT press Cambridge, 2016.
+
+\bibitem{guo2018protein}
+Y.~Guo, B.~Wang, W.~Li, and B.~Yang.
+\newblock Protein secondary structure prediction improved by recurrent neural
+  networks integrated with two-dimensional convolutional neural networks.
+\newblock {\em Journal of bioinformatics and computational biology},
+  16(5):1850021--1850021, 2018.
+
+\bibitem{ho2012survey}
+H.~K. Ho, L.~Zhang, K.~Ramamohanarao, and S.~Martin.
+\newblock A survey of machine learning methods for secondary and supersecondary
+  protein structure prediction.
+\newblock In {\em Protein Supersecondary Structures}, pages 87--106. Springer,
+  2012.
+
+\bibitem{hunt1986protein}
+D.~F. Hunt, J.~R. Yates, J.~Shabanowitz, S.~Winston, and C.~R. Hauer.
+\newblock Protein sequencing by tandem mass spectrometry.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  83(17):6233--6237, 1986.
+
+\bibitem{jiang2017protein}
+Q.~Jiang, X.~Jin, S.-J. Lee, and S.~Yao.
+\newblock Protein secondary structure prediction: A survey of the state of the
+  art.
+\newblock {\em Journal of Molecular Graphics and Modelling}, 76:379--402, 2017.
+
+\bibitem{jones1999protein}
+D.~T. Jones.
+\newblock Protein secondary structure prediction based on position-specific
+  scoring matrices1.
+\newblock {\em Journal of molecular biology}, 292(2):195--202, 1999.
+
+\bibitem{lathrop1994protein}
+R.~H. Lathrop.
+\newblock The protein threading problem with sequence amino acid interaction
+  preferences is np-complete.
+\newblock {\em Protein Engineering, Design and Selection}, 7(9):1059--1068,
+  1994.
+
+\bibitem{lecun2015deep}
+Y.~LeCun, Y.~Bengio, and G.~Hinton.
+\newblock Deep learning.
+\newblock {\em nature}, 521(7553):436, 2015.
+
+\bibitem{levitt1976structural}
+M.~Levitt and C.~Chothia.
+\newblock Structural patterns in globular proteins.
+\newblock {\em Nature}, 261(5561):552, 1976.
+
+\bibitem{li2011novel}
+D.~Li, T.~Li, P.~Cong, W.~Xiong, and J.~Sun.
+\newblock A novel structural position-specific scoring matrix for the
+  prediction of protein secondary structures.
+\newblock {\em Bioinformatics}, 28(1):32--39, 2011.
+
+\bibitem{li2016protein}
+Z.~Li and Y.~Yu.
+\newblock Protein secondary structure prediction using cascaded convolutional
+  and recurrent neural networks.
+\newblock {\em arXiv preprint arXiv:1604.07176}, 2016.
+
+\bibitem{lin2016must}
+Z.~Lin, J.~Lanchantin, and Y.~Qi.
+\newblock Must-cnn: a multilayer shift-and-stitch deep convolutional
+  architecture for sequence-based protein structure prediction.
+\newblock {\em arXiv preprint arXiv:1605.03004}, 2016.
+
+\bibitem{liu2016overview}
+L.~Liu, L.~Tang, W.~Dong, S.~Yao, and W.~Zhou.
+\newblock An overview of topic modeling and its current applications in
+  bioinformatics.
+\newblock {\em SpringerPlus}, 5(1):1608, 2016.
+
+\bibitem{liu2017protein}
+Y.~Liu, J.~Cheng, Y.~Ma, and Y.~Chen.
+\newblock Protein secondary structure prediction based on two dimensional deep
+  convolutional neural networks.
+\newblock In {\em Computer and Communications (ICCC), 2017 3rd IEEE
+  International Conference on}, pages 1995--1999. IEEE, 2017.
+
+\bibitem{mikolov2010recurrent}
+T.~Mikolov, M.~Karafi{\'a}t, L.~Burget, J.~{\v{C}}ernock{\`y}, and
+  S.~Khudanpur.
+\newblock Recurrent neural network based language model.
+\newblock In {\em Eleventh Annual Conference of the International Speech
+  Communication Association}, 2010.
+
+\bibitem{petridis2018end}
+S.~Petridis, T.~Stafylakis, P.~Ma, F.~Cai, G.~Tzimiropoulos, and M.~Pantic.
+\newblock End-to-end audiovisual speech recognition.
+\newblock {\em arXiv preprint arXiv:1802.06424}, 2018.
+
+\bibitem{sonderby2014protein}
+S.~K. S{\o}nderby and O.~Winther.
+\newblock Protein secondary structure prediction with long short term memory
+  networks.
+\newblock {\em arXiv preprint arXiv:1412.7828}, 2014.
+
+\bibitem{wang2010protein}
+Z.~Wang, F.~Zhao, J.~Peng, and J.~Xu.
+\newblock Protein 8-class secondary structure prediction using conditional
+  neural fields.
+\newblock In {\em Bioinformatics and Biomedicine (BIBM), 2010 IEEE
+  International Conference on}, pages 109--114. IEEE, 2010.
+
+\bibitem{wu1995neural}
+C.~Wu, M.~Berry, S.~Shivakumar, and J.~McLarty.
+\newblock Neural networks for full-scale protein sequence classification:
+  Sequence encoding with singular value decomposition.
+\newblock {\em Machine Learning}, 21(1-2):177--193, 1995.
+
+\bibitem{zhang2005improving}
+G.-Z. Zhang, D.-S. Huang, Y.~Zhu, and Y.-X. Li.
+\newblock Improving protein secondary structure prediction by using the residue
+  conformational classes.
+\newblock {\em Pattern Recognition Letters}, 26(15):2346--2352, 2005.
+
+\bibitem{zhang2015fixed}
+S.~Zhang, H.~Jiang, M.~Xu, J.~Hou, and L.~Dai.
+\newblock A fixed-size encoding method for variable-length sequences with its
+  application to neural network language models.
+\newblock {\em arXiv preprint arXiv:1505.01504}, 2015.
+
+\bibitem{zheng2017protein}
+L.~Zheng, H.-l. Li, N.~Wu, and L.~Ao.
+\newblock Protein secondary structure prediction based on deep learning.
+\newblock {\em DEStech Transactions on Engineering and Technology Research},
+  (ismii), 2017.
+
+\bibitem{zhou2014deep}
+J.~Zhou and O.~G. Troyanskaya.
+\newblock Deep supervised and convolutional generative stochastic network for
+  protein secondary structure prediction.
+\newblock {\em arXiv preprint arXiv:1403.1347}, 2014.
+
+\bibitem{周志华2016机器学习}
+周志华.
+\newblock {\em 机器学习}.
+\newblock Qing hua da xue chu ban she, 2016.
+
+\bibitem{李航2012统计学习方法}
+李航 et~al.
+\newblock 统计学习方法, 2012.
+
+\end{thebibliography}

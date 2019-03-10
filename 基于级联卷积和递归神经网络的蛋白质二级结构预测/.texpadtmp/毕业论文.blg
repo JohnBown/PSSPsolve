@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: /Users/yuanchao/Desktop/基于级联卷积和递归神经网络的蛋白质二级结构预测/.texpadtmp/毕业论文.aux
+The style file: abbrv.bst
+Database file #1: ../bibfile.bib
+Warning--empty journal in gers1999learning
+Warning--there's a number but no volume in zheng2017protein
+You've used 33 entries,
+            2118 wiz_defined-function locations,
+            690 strings with 10301 characters,
+and the built_in function-call counts, 11690 in all, are:
+= -- 1135
+> -- 631
+< -- 7
++ -- 252
+- -- 214
+* -- 850
+:= -- 1969
+add.period$ -- 102
+call.type$ -- 33
+change.case$ -- 203
+chr.to.int$ -- 0
+cite$ -- 35
+duplicate$ -- 415
+empty$ -- 852
+format.name$ -- 214
+if$ -- 2403
+int.to.chr$ -- 0
+int.to.str$ -- 33
+missing$ -- 34
+newline$ -- 167
+num.names$ -- 66
+pop$ -- 208
+preamble$ -- 1
+purify$ -- 172
+quote$ -- 0
+skip$ -- 297
+stack$ -- 0
+substring$ -- 680
+swap$ -- 84
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 128
+warning$ -- 2
+while$ -- 106
+width$ -- 35
+write$ -- 355
+(There were 2 warnings)
